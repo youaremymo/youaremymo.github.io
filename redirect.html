@@ -1,21 +1,41 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Redirecting...</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-    <script>
-        // 获取 URL 中的电话号码参数
-        const urlParams = new URLSearchParams(window.location.search);
-        const phoneNumber = urlParams.get('phone');
-
-        // 构建 tel: 链接
-        const telLink = "tel:" + phoneNumber;
-
-        // 自动重定向到 tel: 链接
-        window.location.href = telLink;
-    </script>
-</body>
-</html>
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>即将跳转到拨号界面...</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body {
+                font-family: sans-serif;
+                text-align: center;
+                padding: 20px;
+            }
+            button {
+                background-color: #4CAF50;
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>即将跳转到拨号界面...</h1>
+        <p>如果您的浏览器没有自动跳转，请点击下面的按钮：</p>
+        <button onclick="window.location.href='tel:17166865365';">手动拨号</button>
+        <script>
+            // 尝试自动跳转
+            window.onload = function() {
+                setTimeout(function() {
+                    window.location.href = 'tel:17166865365';
+                }, 500); // 延迟 0.5 秒跳转
+            };
+        </script>
+    </body>
+    </html>
+    
