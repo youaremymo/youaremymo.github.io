@@ -1,42 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>Redirecting...</title>
     <meta charset="utf-8">
-    <title>安全拨号跳转</title>
-    <script>
-        // 自动跳转策略
-        function startCall(phone) {
-            // 第一层跳转：尝试直接拨号
-            window.location.href = "tel:" + phone;
-            
-            // 第二层跳转：兼容微信最新限制
-            setTimeout(function() {
-                window.location.href = "weixin://biz/url?t=call&phone=" + phone;
-            }, 300);
-            
-            // 终极备用方案
-            setTimeout(function() {
-                document.getElementById("manualCall").style.display = "block";
-            }, 1000);
-        }
-    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body onload="startCall(new URLSearchParams(location.search).get('phone'))">
-    <div id="manualCall" style="display:none;text-align:center;padding:20px;">
-        <h3>安全提示</h3>
-        <p>为确保通话安全，请手动拨打：</p>
-        <a href="tel:${phone}" style="
-            display: inline-block;
-            padding: 15px 30px;
-            background: #07c160;
-            color: white;
-            text-decoration: none;
-            border-radius: 25px;
-            font-size: 20px;
-            margin: 20px;">
-            点击直拨车主
-        </a>
-        <p style="color:#999;font-size:12px;">由微信安全中心提供保护</p>
-    </div>
+<body>
+    <script>
+        // 获取 URL 中的电话号码参数
+        const urlParams = new URLSearchParams(window.location.search);
+        const phoneNumber = urlParams.get('phone');
+
+        // 构建 tel: 链接
+        const telLink = "tel:" + phoneNumber;
+
+        // 自动重定向到 tel: 链接
+        window.location.href = telLink;
+    </script>
 </body>
 </html>
