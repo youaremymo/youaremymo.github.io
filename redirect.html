@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Redirecting...</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <script>
+        // 获取 URL 中的电话号码参数
+        const urlParams = new URLSearchParams(window.location.search);
+        const phoneNumber = urlParams.get('phone');
+
+        // 构建 tel: 链接
+        const telLink = "tel:" + phoneNumber;
+
+        // 自动重定向到 tel: 链接
+        window.location.href = telLink;
+    </script>
+</body>
+</html>
