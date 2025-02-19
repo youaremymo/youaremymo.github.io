@@ -1,41 +1,42 @@
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>即将跳转到拨号界面...</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <style>
-            body {
-                font-family: sans-serif;
-                text-align: center;
-                padding: 20px;
-            }
-            button {
-                background-color: #4CAF50;
-                border: none;
-                color: white;
-                padding: 15px 32px;
-                text-align: center;
-                text-decoration: none;
-                display: inline-block;
-                font-size: 16px;
-                margin: 4px 2px;
-                cursor: pointer;
-            }
-        </style>
-    </head>
-    <body>
-        <h1>即将跳转到拨号界面...</h1>
-        <p>如果您的浏览器没有自动跳转，请点击下面的按钮：</p>
-        <button onclick="window.location.href='tel:17166865365';">手动拨号</button>
-        <script>
-            // 尝试自动跳转
-            window.onload = function() {
-                setTimeout(function() {
-                    window.location.href = 'tel:17166865365';
-                }, 500); // 延迟 0.5 秒跳转
-            };
-        </script>
-    </body>
-    </html>
-    
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>安全拨号跳转</title>
+    <script>
+        // 自动跳转策略
+        function startCall(phone) {
+            // 第一层跳转：尝试直接拨号
+            window.location.href = "tel:" + phone;
+            
+            // 第二层跳转：兼容微信最新限制
+            setTimeout(function() {
+                window.location.href = "weixin://biz/url?t=call&phone=" + phone;
+            }, 300);
+            
+            // 终极备用方案
+            setTimeout(function() {
+                document.getElementById("manualCall").style.display = "block";
+            }, 1000);
+        }
+    </script>
+</head>
+<body onload="startCall(new URLSearchParams(location.search).get('phone'))">
+    <div id="manualCall" style="display:none;text-align:center;padding:20px;">
+        <h3>安全提示</h3>
+        <p>为确保通话安全，请手动拨打：</p>
+        <a href="tel:${phone}" style="
+            display: inline-block;
+            padding: 15px 30px;
+            background: #07c160;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 20px;
+            margin: 20px;">
+            点击直拨车主
+        </a>
+        <p style="color:#999;font-size:12px;">由微信安全中心提供保护</p>
+    </div>
+</body>
+</html>
